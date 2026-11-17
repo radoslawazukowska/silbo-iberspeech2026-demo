@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Synthesis Demo Page</title>
+    <!-- Loading Tailwind CSS for simple, clean styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Loading Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800">
+
+    <!-- Main Container: max-width 800px and centered -->
+    <main class="max-w-[800px] mx-auto px-6 py-12 md:py-20">
+
+        <!-- 1. Title and Author Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-tight">
+                Concatenative Synthesis Pipeline for Silbo Gomero <br class="hidden md:block"> from Sub-Hour Multi-Speaker Recordings
+            </h1>
+            <p class="text-lg md:text-xl text-slate-700 mb-2">
+                Radosława Żukowska<sup>1</sup>, Fernando Ramos López<sup>2</sup>, Mateo José Cámara Largo<sup>3</sup>, Klara Borowa<sup>1</sup>
+            </p>
+            <p class="text-md text-slate-500 italic">
+                <sup>1</sup> Warsaw University of Technology, Poland,<br class="hidden md:block"><sup>2</sup> Independent Researcher, Spain,<br class="hidden md:block"><sup>3</sup>Universidad Politécnica de Madrid, Spain
+            </p>
+            <p class="text-sm font-medium text-slate-400 mt-2 mt-4 uppercase tracking-wider">
+                Presented at IberSpeech 2026
+            </p>
+        </header>
+
+        <!-- 2. Resources Row -->
+        <div class="flex flex-wrap justify-center gap-4 mb-16">
+            <!-- Paper Link -->
+            <a href="https://www.isca-archive.org/tmp/iberspeech_2026/zukowska26_iberspeech.pdf" class="flex items-center px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg border border-slate-300 transition-colors shadow-sm">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                Read Paper
+            </a>
+            <!-- GitHub Code Link -->
+            <a href="https://github.com/radoslawazukowska/silbo-concatenative-synthesis" class="flex items-center px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg border border-slate-900 transition-colors shadow-sm">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.699-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path></svg>
+                Source Code
+            </a>
+            <!-- Dataset Link -->
+            <a href="https://www.openslr.org//1" class="flex items-center px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg border border-slate-300 transition-colors shadow-sm">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                Dataset
+            </a>
+        </div>
+
+        <!-- 3. System Architecture Section -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 border-b border-slate-200 pb-3 mb-6">System Architecture</h2>
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                The diagram below illustrates the high-level workflow of our synthesis system.
+            </p>
+            <!-- Replace the src with your actual image path on GitHub (e.g., ./assets/architecture.png) -->
+            <figure class="w-full">
+                <img src="./assets/synthesis-plot.png" alt="System Architecture Diagram" class="w-full h-auto rounded-xl shadow-sm border border-slate-200 object-cover">
+                <figcaption class="text-sm text-center text-slate-500 mt-3">Figure 1: Overview of the synthesis system.</figcaption>
+            </figure>
+        </section>
+
+        <!-- 4. Audio Samples Section -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-900 border-b border-slate-200 pb-3 mb-6">Synthesized Audio Samples</h2>
+            <p class="text-slate-600 mb-8 leading-relaxed">
+                Below are selected examples.
+            </p>
+
+            <!-- Sample Block 1 -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-6 shadow-sm">
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">Most intelligible samples:</h3>
+                <p class="text-slate-600 mb-4 text-sm">
+                    <strong>Transcript:</strong> "Buenas tardes."<br>
+                    maybe some text
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <span class="block text-sm font-medium text-slate-500 mb-2">Transcript: Buenas tardes.</span>
+                        <audio controls class="w-full h-10">
+                            <source src="./audio/Sample 27.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <span class="block text-sm font-medium text-slate-500 mb-2">Transcript: Dales agua a los animales.</span>
+                        <audio controls class="w-full h-10">
+                            <source src="./audio/Sample 5.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <span class="block text-sm font-medium text-slate-500 mb-2">Transcript: Yo no te entiendo..</span>
+                        <audio controls class="w-full h-10">
+                            <source src="./audio/Sample 21.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+
+                </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-6 shadow-sm">
+                <h3 class="text-lg font-semibold text-slate-900 mb-2">Least intelligible samples:</h3>
+                <p class="text-slate-600 mb-4 text-sm">
+                    <strong>Transcript:</strong> "Buenas tardes."<br>
+                    maybe some text
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <span class="block text-sm font-medium text-slate-500 mb-2">Transcript: Baja al valle.</span>
+                        <audio controls class="w-full h-10">
+                            <source src="./audio/Sample 20.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg border border-slate-200">
+                        <span class="block text-sm font-medium text-slate-500 mb-2">Transcript: Pon los plátanos a la sombra.</span>
+                        <audio controls class="w-full h-10">
+                            <source src="./audio/Sample 11.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-20 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm">
+            <p>&copy; 2026 Radosława Żukowska, Fernando Ramos López, Mateo José Cámara Largo, Klara Borowa. All rights reserved.</p>
+        </footer>
+
+    </main>
+
+</body>
+</html>
